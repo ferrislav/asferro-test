@@ -1,0 +1,7 @@
+.idea
+.vscode
+lib/
+lib64/
+share/
+lib64
+
