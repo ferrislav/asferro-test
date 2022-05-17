@@ -1,0 +1,27 @@
+# user login and password for email box
+# Although them aren't locators put them here for convenience.
+user_login = asferrotest
+user_password = 9eqLiR8VgsR3t7Ta
+user_address = asferrotest@yahoo.com
+
+# Login page.
+# locator of login page for email box
+login_url = https://login.yahoo.com/
+login_pass_partial_url = /account/challenge/password
+login_username_id = login-username
+login_username_next_btn = login-signin
+login_pass_fld_id = login-passwd
+login_pass_submit_id = login-signin
+
+# button for transferring to mail account.
+mail_link = ybarMailLink
+mail_home_partial_url = mail.yahoo.com
+
+# css selector for attributed link button to compose
+# it's a css selector!
+compose_btn = a.e_dRA
+to_fld_id = message-to-field
+# css selector for subject input
+subject_fld = input.q_T:nth-child(1)
+body_fld_class = rte
+send_mail_btn_class = q_Z29WjXl
