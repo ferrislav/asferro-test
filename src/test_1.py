@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import pytest
 import string
 import secrets
-
+from src.util import Util
 
 @pytest.mark.usefixtures("driver_init")
 class TestSend:
@@ -23,6 +23,7 @@ class TestSend:
                 tmp.append(self.get_random_str())
             l.append(tuple(tmp))
         return l
+
 
     def login_test(self, locators):
         self.driver.get(locators["login_url"])
@@ -53,7 +54,12 @@ class TestSend:
     def send_test(self, get_list_tup, locators):
         assert len(get_list_tup) == 10
         assert EC.url_contains(locators["mail_home_partial_url"])
-        # must be in right location now.
+        # Make sure that no messages which send by me in inbox
+        util = Util(self.driver)
+        messages = util.get_all_by_me(locators)
+        if len(messages) > 0:
+            util.delete_all(locators)
+        # must be in right location now. And ready to conduct tests.
         address = locators["user_address"]
         compose_btn = self.driver.find_element(By.CSS_SELECTOR, locators["compose_btn"])
         compose_btn.click()

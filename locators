@@ -25,3 +25,15 @@ to_fld_id = message-to-field
 subject_fld = input.q_T:nth-child(1)
 body_fld_class = rte
 send_mail_btn_class = q_Z29WjXl
+
+# Delete messages
+select_all_btn = /html/body/div[1]/div/div[1]/div/div[7]/div/div[1]/div/ul/li[1]/button
+select_dropdown_btn = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[1]/div/div[1]/div/div/ul/li[2]/div/span/button/span
+delete_btn = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[1]/div/div[2]/div/div[3]/button
+
+# CHECK AND WORK WITH EMAILS THAT WERE SEND.
+# css selector for inbox button
+inbox_btn = a.u_b
+message_list_item_class = message-list-item
+message_list_container_path = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[2]/div/div/div[2]/div/div[1]
+message_sender = strong.u_Z13VSE6
