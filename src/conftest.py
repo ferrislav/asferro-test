@@ -7,7 +7,7 @@ def should_drop(s):
     return s.startswith("#", 0) or len(s) == 0
 
 
-@pytest.fixture(scope="package")
+@pytest.fixture(scope='session')
 def locators(pytestconfig):
     res = {}
     curr_path = pytestconfig.invocation_params.dir.cwd()
@@ -24,14 +24,12 @@ def locators(pytestconfig):
     return res
 
 @pytest.fixture(scope="session")
-def locators_init(request):
-    web_driver = webdriver.Firefox()
+def locators_init(request, locators):
     session = request.node
     for item in session.items:
         cls = item.getparent(pytest.Class)
-        setattr(cls.obj, "driver", web_driver)
+        setattr(cls.obj, "locators", locators)
     yield
-    web_driver.close()
 
 
 @pytest.fixture(scope="session")

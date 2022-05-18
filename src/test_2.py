@@ -9,7 +9,7 @@ import pdb
 from src.util import Util
 
 
-@pytest.mark.usefixtures("driver_init")
+@pytest.mark.usefixtures("driver_init", "locators_init")
 class TestReceive:
 
     # For the sake of simplicity would continue from where I'm in drive nav.
@@ -22,16 +22,16 @@ class TestReceive:
     #     self.msg_values = dict()
 
 
-    def count_test(self, locators):
-        assert EC.url_contains(locators["mail_home_partial_url"])
-        util = Util(self.driver, locators)
-        inbox_btn = self.driver.find_element(By.CSS_SELECTOR, locators["inbox_btn"])
+    def count_test(self):
+        assert EC.url_contains(self.locators["mail_home_partial_url"])
+        util = Util(self.driver, self.locators)
+        inbox_btn = self.driver.find_element(By.CSS_SELECTOR, self.locators["inbox_btn"])
         inbox_btn.click()
         if util.is_message_container_visible():
             # Loop and wait for all messages to arrive
             for i in range(5):
                 logging.log(logging.INFO, f"Wait for all messages to arrive, {i+1} of 5")
-                messages = self.driver.find_elements(By.CLASS_NAME, locators["message_list_item_class"])
+                messages = self.driver.find_elements(By.CLASS_NAME, self.locators["message_list_item_class"])
                 if len(messages) < 10:
                     time.sleep(4)
                 else:
