@@ -36,4 +36,4 @@ delete_btn = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/d
 inbox_btn = a.u_b
 message_list_item_class = message-list-item
 message_list_container_path = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[2]/div/div/div[2]/div/div[1]
-message_sender = strong.u_Z13VSE6
+message_sender = //a/div/div[1]/div[2]/span/strong

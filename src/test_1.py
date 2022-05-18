@@ -7,6 +7,7 @@ import string
 import secrets
 from src.util import Util
 
+
 @pytest.mark.usefixtures("driver_init")
 class TestSend:
 
@@ -23,7 +24,6 @@ class TestSend:
                 tmp.append(self.get_random_str())
             l.append(tuple(tmp))
         return l
-
 
     def login_test(self, locators):
         self.driver.get(locators["login_url"])
@@ -55,32 +55,14 @@ class TestSend:
         assert len(get_list_tup) == 10
         assert EC.url_contains(locators["mail_home_partial_url"])
         # Make sure that no messages which send by me in inbox
-        util = Util(self.driver)
-        messages = util.get_all_by_me(locators)
+        util = Util(self.driver, locators)
+        messages = util.get_all_by_me()
         if len(messages) > 0:
-            util.delete_all(locators)
+            util.delete_all()
         # must be in right location now. And ready to conduct tests.
         address = locators["user_address"]
         compose_btn = self.driver.find_element(By.CSS_SELECTOR, locators["compose_btn"])
         compose_btn.click()
-
-        def send_mail(str_tup):
-            assert len(str_tup) == 2
-            compose_btn.click()
-            wait = WebDriverWait(self.driver, 10)
-            # must wait until to field is ready
-            wait.until(EC.presence_of_element_located((By.ID, locators["to_fld_id"])))
-            to_fld = self.driver.find_element(By.ID, locators["to_fld_id"])
-            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, locators["subject_fld"])))
-            subject_fld = self.driver.find_element(By.CSS_SELECTOR, locators["subject_fld"])
-            body_fld = self.driver.find_element(By.CLASS_NAME, locators["body_fld_class"])
-            send_button = self.driver.find_element(By.CLASS_NAME, locators["send_mail_btn_class"])
-            to_fld.send_keys(address)
-            subject_fld.send_keys(str_tup[0])
-            body_fld.send_keys(str_tup[1])
-            send_button.click()
-            self.driver.implicitly_wait(1)
-
         for tup in get_list_tup:
             self.driver.implicitly_wait(1)
-            send_mail(tup)
+            util.send_mail(tup)
