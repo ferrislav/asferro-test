@@ -1,0 +1,6 @@
+# Settings for tests. All that will require adjustments.
+
+# driver creation
+driver_exec_path = /home/zxxz/.cargo/bin/geckodriver
+browser_profile = /home/zxxz/.mozilla/firefox/70g38rbt.Selenium_webdriver
+page_load_strategy = eager

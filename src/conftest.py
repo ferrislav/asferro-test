@@ -9,11 +9,13 @@ def should_drop(s):
     return s.startswith("#", 0) or len(s) == 0
 
 
-@pytest.fixture(scope='session')
-def locators(pytestconfig):
+def get_file(config, name):
+    curr_path = config.invocation_params.dir.cwd()
+    return os.path.join(curr_path, name)
+
+
+def get_props(file_path):
     res = {}
-    curr_path = pytestconfig.invocation_params.dir.cwd()
-    file_path = os.path.join(curr_path, "locators")
     with open(file_path, "r") as file:
         for line in file:
             line = line.strip()
@@ -26,22 +28,35 @@ def locators(pytestconfig):
     return res
 
 
+@pytest.fixture(scope='session')
+def settings(pytestconfig):
+    file_path = get_file(pytestconfig, "settings")
+    return get_props(file_path)
+
+
+@pytest.fixture(scope='session')
+def locators(pytestconfig):
+    file_path = get_file(pytestconfig, "locators")
+    return get_props(file_path)
+
+
 @pytest.fixture(scope="session")
-def locators_init(request, locators):
+def tests_init(request, locators, settings):
     session = request.node
     for item in session.items:
         cls = item.getparent(pytest.Class)
         setattr(cls.obj, "locators", locators)
+        setattr(cls.obj, "settings", settings)
     yield
 
 
 @pytest.fixture(scope="session")
-def driver_init(request):
+def driver_init(request, settings):
     options = FirefoxOptions()
-    options.page_load_strategy = 'eager'
-    profile_path = r"/home/zxxz/.mozilla/firefox/70g38rbt.Selenium_webdriver"
+    options.page_load_strategy = settings['page_load_strategy']
+    profile_path = settings['browser_profile']
     options.set_preference('profile', profile_path)
-    service = Service('/home/zxxz/.cargo/bin/geckodriver')
+    service = Service(settings['driver_exec_path'])
     web_driver = webdriver.Firefox(
         service=service,
         options=options,

@@ -9,7 +9,7 @@ import pdb
 from src.util import Util
 
 
-@pytest.mark.usefixtures("driver_init", "locators_init")
+@pytest.mark.usefixtures("driver_init", "tests_init")
 class TestReceive:
 
     logger = logging.Logger("test_2", logging.INFO)

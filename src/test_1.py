@@ -8,7 +8,7 @@ import secrets
 from src.util import Util
 
 
-@pytest.mark.usefixtures("driver_init", "locators_init")
+@pytest.mark.usefixtures("driver_init", "tests_init")
 class TestSend:
 
     def get_random_str(self):
