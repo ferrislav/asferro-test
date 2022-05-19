@@ -60,9 +60,9 @@ class TestSend:
         if len(messages) > 0:
             util.delete_all()
         # must be in right location now. And ready to conduct tests.
-        address = self.locators["user_address"]
-        compose_btn = self.driver.find_element(By.CSS_SELECTOR, self.locators["compose_btn"])
-        compose_btn.click()
+        # address = self.locators["user_address"]
+        # compose_btn = self.driver.find_element(By.CSS_SELECTOR, self.locators["compose_btn"])
+        # compose_btn.click()
         for tup in get_list_tup:
-            self.driver.implicitly_wait(1)
+            self.driver.implicitly_wait(2)
             util.send_mail(tup)

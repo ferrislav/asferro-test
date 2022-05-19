@@ -17,6 +17,12 @@ login_pass_submit_id = login-signin
 mail_link = ybarMailLink
 mail_home_partial_url = mail.yahoo.com
 
+# Check if inbox is empty
+# Root element for mails in inbox.
+mail_app_component_id = mail-app-component
+# partial xpath starting from mail_app_component_id element
+info_message_path = ./div[2]/div/div[2]/div[1]/span[1]
+
 # css selector for attributed link button to compose
 # it's a css selector!
 compose_btn = a.e_dRA
@@ -32,8 +38,17 @@ select_dropdown_btn = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/
 delete_btn = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[1]/div/div[2]/div/div[3]/button
 
 # CHECK AND WORK WITH EMAILS THAT WERE SEND.
-# css selector for inbox button
+
 inbox_btn = a.u_b
 message_list_item_class = message-list-item
-message_list_container_path = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[2]/div/div/div[2]/div/div[1]
-message_sender = //a/div/div[1]/div[2]/span/strong
+
+messages_in_container_css = li
+message_sender = //a/div/div[1]/div[2]/span/*[1]
+
+# Page for message
+message_topic_css=span[data-test-id="message-group-subject-text"]
+message_holder_css = div[dir="ltr"]
+
+# Full path of ul containing li of messages.
+message_list_container_path = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[2]/div/div/div[3]/div/div[1]/ul
+# message_list_container_css = div[data-test-id$='virtual-list'] ul

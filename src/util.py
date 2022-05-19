@@ -2,10 +2,12 @@ import logging
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import time
 import pytest
+import pdb
 import string
 import secrets
 
@@ -19,33 +21,43 @@ class Util:
         self.driver = driver
         self.locators = locators
 
-    def is_message_container_visible(self):
+    def is_element_findable(self, locator):
+        try:
+            self.driver.find_element(locator)
+        except NoSuchElementException:
+            return False
+        return True
+
+
+    def is_message_container_present(self):
+        # pdb.set_trace()
+        is_present = False
         for i in range(3):
-            try:
-                logging.log(logging.INFO, f"Try for message container {i + 1} attempt of 3")
-                el = self.driver.find_element(By.XPATH, self.locators["message_list_container_path"])
-                if el:
-                    break
-            except NoSuchElementException:
-                time.sleep(3)
-                self.driver.refresh()
+            is_present = self.is_element_findable(locate_with(By.XPATH, self.locators["message_list_container_path"]))
+            if is_present:
+                break
+            time.sleep(2)
+        # give browser time to load component
+        time.sleep(0.5)
+        return is_present
 
-        return EC.visibility_of_element_located((By.XPATH, self.locators["message_list_container_path"]))
-
-    def get_message_sender(self, msg_elements):
-        # go through all message elements and get string sender.
-        pass
+    def click_inbox_btn(self):
+        inbox_btn = self.driver.find_element(By.CSS_SELECTOR, self.locators["inbox_btn"])
+        inbox_btn.click()
+        self.driver.implicitly_wait(1)
 
     def get_all_by_me(self):
         res = []
-        inbox_btn = self.driver.find_element(By.CSS_SELECTOR, self.locators["inbox_btn"])
-        inbox_btn.click()
-
-        if self.is_message_container_visible():
-            messages = self.driver.find_elements(By.CLASS_NAME, self.locators["message_list_item_class"])
-            if len(messages) == 0:
+        self.click_inbox_btn()
+        if self.is_message_container_present():
+            container = self.driver.find_element(By.XPATH, self.locators["message_list_container_path"])
+            # pdb.set_trace()
+            messages = container.find_elements(By.CSS_SELECTOR, self.locators["messages_in_container_css"])
+            # skip first two
+            messages_sl = messages[2:]
+            if len(messages_sl) == 0:
                 return res
-            for message in messages:
+            for message in messages_sl:
                 sender = message.find_element(By.XPATH, self.locators["message_sender"])
                 sender_name = sender.text
                 if sender_name == "me":
@@ -73,10 +85,10 @@ class Util:
         to_fld = self.driver.find_element(By.ID, self.locators["to_fld_id"])
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, self.locators["subject_fld"])))
         subject_fld = self.driver.find_element(By.CSS_SELECTOR, self.locators["subject_fld"])
+        # by this time fields  below are already visible
         body_fld = self.driver.find_element(By.CLASS_NAME, self.locators["body_fld_class"])
         send_button = self.driver.find_element(By.CLASS_NAME, self.locators["send_mail_btn_class"])
         to_fld.send_keys(address)
         subject_fld.send_keys(str_tup[0])
         body_fld.send_keys(str_tup[1])
         send_button.click()
-        self.driver.implicitly_wait(1)

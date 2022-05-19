@@ -17,7 +17,7 @@ def locators(pytestconfig):
             line = line.strip()
             b = should_drop(line)
             if not b:
-                st_list = line.split("=")
+                st_list = line.split("=", 1)
                 if len(st_list) == 2:
                     res[st_list[0].strip()] = st_list[1].strip()
     assert len(res) > 0
