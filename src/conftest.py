@@ -1,5 +1,7 @@
 import os
 from selenium import webdriver
+from selenium.webdriver import FirefoxOptions
+from selenium.webdriver.firefox.service import Service
 import pytest
 
 
@@ -23,6 +25,7 @@ def locators(pytestconfig):
     assert len(res) > 0
     return res
 
+
 @pytest.fixture(scope="session")
 def locators_init(request, locators):
     session = request.node
@@ -34,11 +37,18 @@ def locators_init(request, locators):
 
 @pytest.fixture(scope="session")
 def driver_init(request):
-    web_driver = webdriver.Firefox()
+    options = FirefoxOptions()
+    options.page_load_strategy = 'eager'
+    profile_path = r"/home/zxxz/.mozilla/firefox/70g38rbt.Selenium_webdriver"
+    options.set_preference('profile', profile_path)
+    service = Service('/home/zxxz/.cargo/bin/geckodriver')
+    web_driver = webdriver.Firefox(
+        service=service,
+        options=options,
+    )
     session = request.node
     for item in session.items:
         cls = item.getparent(pytest.Class)
         setattr(cls.obj, "driver", web_driver)
     yield
     web_driver.close()
-
