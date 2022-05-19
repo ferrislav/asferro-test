@@ -4,3 +4,49 @@
 driver_exec_path = /home/zxxz/.cargo/bin/geckodriver
 browser_profile = /home/zxxz/.mozilla/firefox/70g38rbt.Selenium_webdriver
 page_load_strategy = eager
+
+# common to tests
+messages_quantity = 10
+driver_wait = 2
+
+# test_1
+
+# get_random_str:
+# now long topic and body strings will be
+str_len = 10
+
+# get_list_tup:
+# now many strings will be in tuple created for topic and body
+tup_len = 2
+
+# test_2
+# count_test:
+
+# wait time for mail app component in count_test
+mail_app_component_wait = 10
+
+# test string in count_test for folder to be empty
+is_folder_empty_str = folder is empty
+
+# how many times to try for messages to arrive
+loops_for_all_msgs = 8
+
+# in loop where messages arrival is waiting time for thread to sleep in seconds.
+messages_arrive_wait = 10
+
+# get_message:
+# time to wait for message holder to be present
+message_holder_wait = 20
+
+# util
+# is_message_container_present:
+
+msg_container_loop = 3
+msg_container_loop_sleep = 2
+msg_container_rt_sleep = 0.5
+click_inbox_rt_sleep = 1
+messages_slice_from = 2
+sender_name_test = me
+select_all_btn_wait = 10
+send_mail_wait = 10
+
