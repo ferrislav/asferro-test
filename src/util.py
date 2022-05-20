@@ -38,7 +38,7 @@ class Util:
         msg_container_loop_sleep = int(self.settings["msg_container_loop_sleep"])
         msg_container_rt_sleep = float(self.settings["msg_container_rt_sleep"])
         for i in range(msg_container_loop):
-            is_present = self.is_element_findable(locate_with(By.XPATH, self.locators["message_list_container_path"]))
+            is_present = self.is_element_findable(locate_with(By.CSS_SELECTOR, self.locators["message_list_container_ul"]))
             if is_present:
                 break
             time.sleep(msg_container_loop_sleep)
@@ -48,29 +48,36 @@ class Util:
 
     def click_inbox_btn(self):
         click_inbox_rt_sleep = int(self.settings["click_inbox_rt_sleep"])
-        inbox_btn = self.driver.find_element(By.CSS_SELECTOR, self.locators["inbox_btn"])
+        self.driver.implicitly_wait(click_inbox_rt_sleep)
+        EC.url_contains("folders")
+        inbox_btn = self.driver.find_element(By.XPATH, self.locators["inbox_btn"])
         inbox_btn.click()
         self.driver.implicitly_wait(click_inbox_rt_sleep)
 
     def get_all_by_me(self):
         res = []
-        self.click_inbox_btn()
-        if self.is_message_container_present():
-            container = self.driver.find_element(By.XPATH, self.locators["message_list_container_path"])
-            # pdb.set_trace()
-            messages = container.find_elements(By.CSS_SELECTOR, self.locators["messages_in_container_css"])
-            # skip first two
-            messages_slice_from = int(self.settings["messages_slice_from"])
-            messages_sl = messages[messages_slice_from:]
-            if len(messages_sl) == 0:
-                return res
-
-            sender_name_test = self.settings["sender_name_test"]
-            for message in messages_sl:
-                sender = message.find_element(By.XPATH, self.locators["message_sender"])
-                sender_name = sender.text
-                if sender_name == sender_name_test:
-                    res.append(message)
+        # self.click_inbox_btn()
+        # if self.is_message_container_present():
+        self.driver.refresh()
+        container = self.driver.find_element(By.XPATH, self.locators["message_list_container_ul"])
+        # WebDriverWait(self.driver, 10).until(EC.staleness_of(container))
+        messages = container.find_elements(By.CSS_SELECTOR, self.locators["messages_in_container"])
+        # messages = self.driver.find_elements(By.XPATH, 'all_msgs')
+        # skip first two
+        messages_slice_from = int(self.settings["messages_slice_from"])
+        # messages = messages[messages_slice_from:]
+        # pdb.set_trace()
+        logging.info(f"messages len in find all: {len(messages)}")
+        if len(messages) == 0:
+            return res
+        sender_name_test = self.settings["sender_name_test"]
+        for message in messages:
+            logging.info(f"{message.get_attribute('href')}")
+            sender = message.find_element(By.XPATH, self.locators["message_sender"])
+            sender_name = sender.text
+            if sender_name == sender_name_test:
+                res.append(message)
+        logging.info(f"res len in find all before return: {len(res)}")
         return res
 
     def delete_all(self):
@@ -78,7 +85,7 @@ class Util:
         select_dropdown_btn.click()
         select_all_btn_wait = int(self.settings["select_all_btn_wait"])
         wait = WebDriverWait(self.driver, select_all_btn_wait)
-        wait.until(EC.presence_of_element_located((By.XPATH, self.locators["select_all_btn"])))
+        wait.until(EC.visibility_of_element_located((By.XPATH, self.locators["select_all_btn"])))
         select_all_btn = self.driver.find_element(By.XPATH, self.locators["select_all_btn"])
         select_all_btn.click()
         delete_btn = self.driver.find_element(By.XPATH, self.locators['delete_btn'])

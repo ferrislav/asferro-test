@@ -39,16 +39,25 @@ delete_btn = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/d
 
 # CHECK AND WORK WITH EMAILS THAT WERE SEND.
 
-inbox_btn = a.u_b
+inbox_btn = (//a[@data-test-id='folder-list-item'])[1]
 message_list_item_class = message-list-item
 
-messages_in_container_css = li
+# $x("//li[@role='list-item']")
+# div with ul and lists for messages.
+
+message_list_container_ul = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div/div[3]/div/div[1]/ul
+all_msgs = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div/div[3]/div/div[1]/ul/li
+# mail-app-component > div > div > div > div.D_F.ab_FT.em_N.ek_BB.iz_A.H_6D6F > div > div > div.W_6D6F.H_6D6F.cZ1RN91d_n.o_h.p_R.em_N.D_F > div > div.p_R.Z_0.iy_h.iz_A.W_6D6F.H_6D6F.k_w.em_N.c22hqzz_GN > ul
+# partial locator from message_list_container_path
+messages_in_container = li > a
 message_sender = //a/div/div[1]/div[2]/span/*[1]
 
 # Page for message
 message_topic_css=span[data-test-id="message-group-subject-text"]
-message_holder_css = div[dir="ltr"]
+message_body_div_class = X_6MGW
+# partial path starting from message_body_div_class
+message_body_path = .//div[dir="ltr"]
+# message_holder_css = div[dir="ltr"]
 
 # Full path of ul containing li of messages.
-message_list_container_path = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[2]/div/div/div[3]/div/div[1]/ul
 # message_list_container_css = div[data-test-id$='virtual-list'] ul

@@ -1,3 +1,4 @@
+import logging
 import pdb
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -9,7 +10,7 @@ from src.util import Util
 
 
 @pytest.mark.usefixtures("driver_init", "tests_init")
-class TestSend:
+class TestLogin:
 
     def get_random_str(self):
         r = int(self.settings["str_len"])
@@ -47,8 +48,9 @@ class TestSend:
         wait = WebDriverWait(self.driver, t)
         curr_url = self.driver.current_url
         passwd = self.locators["user_password"]
-        wait.until(EC.presence_of_element_located((By.ID, self.locators["login_pass_submit_id"])))
+        wait.until(EC.visibility_of_element_located((By.ID, self.locators["login_pass_fld_id"])))
         pass_fld = self.driver.find_element(By.ID, self.locators["login_pass_fld_id"])
+        wait.until(EC.visibility_of_element_located((By.ID, self.locators["login_pass_submit_id"])))
         pass_submit_btn = self.driver.find_element(By.ID, self.locators["login_pass_submit_id"])
         pass_fld.send_keys(passwd)
         pass_submit_btn.click()
@@ -59,7 +61,7 @@ class TestSend:
         t = int(self.settings["driver_wait"])
         wait = WebDriverWait(self.driver, t)
         curr_url = self.driver.current_url
-        wait.until(EC.presence_of_element_located((By.ID, self.locators["mail_link"])))
+        wait.until(EC.visibility_of_element_located((By.ID, self.locators["mail_link"])))
         mail_btn = self.driver.find_element(By.ID, self.locators["mail_link"])
         mail_btn.click()
         assert EC.url_changes(curr_url)
@@ -73,6 +75,7 @@ class TestSend:
         # Make sure that no messages send by me in inbox
         util = Util(self.driver, self.locators, self.settings)
         messages = util.get_all_by_me()
+        logging.info(f"messages len before delete: {len(messages)}")
         if len(messages) > 0:
             util.delete_all()
         for tup in get_list_tup:

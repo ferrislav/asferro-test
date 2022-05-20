@@ -6,7 +6,8 @@ browser_profile = /home/zxxz/.mozilla/firefox/70g38rbt.Selenium_webdriver
 page_load_strategy = eager
 
 # common to tests
-messages_quantity = 10
+# TODO: Don't forget to change to 10
+messages_quantity = 3
 driver_wait = 2
 
 # test_1
