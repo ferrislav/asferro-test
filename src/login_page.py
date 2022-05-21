@@ -12,10 +12,6 @@ class LoginPage(CommonPage):
         self.locators = locators
         self.settings = settings
         self.wait_time = settings["driver_wait"]
-        # self.login_next_btn_locator = (By.ID, self.locators["login_username_next_btn"])
-        # self.login_fld_locator = (By.ID, self.locators["login_username_id"])
-        # self.pass_fld_locator = (By.ID, self.locators["login_pass_fld_id"])
-        # self.pass_submit_btn_locator = (By.ID, self.locators["login_pass_submit_id"])
 
 
     def enter_login(self):
@@ -47,6 +43,3 @@ class LoginPage(CommonPage):
         if self.is_not_logged():
             # enter_pass calls enter_login
             self.enter_pass()
-
-
-

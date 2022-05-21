@@ -1,26 +1,8 @@
-import logging
-import pdb
-
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import time
-
-
-# common div for signin and logged
-# div._yb_31tgj
-#
-# span with user name. when logged in
-# span._yb_ynfjo
-#
-# class name of link to sign in
-# a._yb_1vuak
-
-# check if logged in
-# if not call loginpage to login.
-
 
 class CommonPage:
     def __init__(self, driver, locators, settings):
@@ -79,15 +61,12 @@ class CommonPage:
     def go_to_inbox_page(self):
         self.driver.get(self.locators["inbox_url"])
         time.sleep(0.5)
-        # assert self.is_on_inbox_page()
 
 
     def go_to_home_page(self):
         self.driver.get(self.locators["home_page"])
         time.sleep(0.5)
-        # assert self.is_on_home_page()
 
     def go_to_login_page(self):
         self.driver.get(self.locators["login_url"])
         time.sleep(0.5)
-        # assert self.is_on_login_page()
