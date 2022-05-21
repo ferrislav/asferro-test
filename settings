@@ -7,7 +7,7 @@ page_load_strategy = eager
 
 # common to tests
 # TODO: Don't forget to change to 10
-messages_quantity = 3
+messages_quantity = 10
 driver_wait = 2
 
 # test_1

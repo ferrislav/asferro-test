@@ -1,3 +1,4 @@
+import pdb
 import string
 import secrets
 import time
@@ -31,17 +32,17 @@ class ComposePage(CommonPage):
     # to go to compose page driver must be on inbox page first
     # compose page url changes so have to use controllers to navigate
     def go_to_compose_page(self):
-        if super.is_on_compose_page():
+        if super(ComposePage, self).is_on_compose_page():
             return
-        elif super.is_on_home_page:
-            super.go_to_inbox()
+        elif super(ComposePage, self).is_on_inbox_page():
             self.click_compose_button()
-        elif super.is_on_inbox_page():
+        else:
+            super(ComposePage, self).go_to_inbox_page()
             self.click_compose_button()
 
     def get_random_str(self):
         r = int(self.settings["str_len"])
-        chars = string.ascii_letters + string.digits
+        chars = string.ascii_letters + string.digits + string.digits
         return ''.join(secrets.choice(chars) for i in range(r))
 
     def get_list_tup(self):
@@ -58,7 +59,7 @@ class ComposePage(CommonPage):
     def send(self):
         # make sure that driver is in the right location
         if not self.is_on_compose_page():
-            self.go_to_compose()
+            self.go_to_compose_page()
         t = int(self.settings["driver_wait"])
         tup_l = int(self.settings["messages_quantity"])
         tup_list = self.get_list_tup()
@@ -97,3 +98,5 @@ class ComposePage(CommonPage):
         subject_fld.send_keys(str_tup[0])
         body_fld.send_keys(str_tup[1])
         send_button.click()
+        # otherwise it sends soo quick email box can not distinguish requests.
+        time.sleep(0.2)

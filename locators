@@ -62,14 +62,11 @@ body_fld_class = rte
 send_mail_btn_class = q_Z29WjXl
 
 # MessagePage  ------------------------------------
-message_topic_css=span[data-test-id="message-group-subject-text"]
-message_body_div_class = X_6MGW
-# partial path starting from message_body_div_class
-message_body_path = .//div[dir="ltr"]
-# message_holder_css = div[dir="ltr"]
+# span holding message topic
+message_topic=((//header)[2]/div[2]/span/span)[1]
 
+# div holding a body test
+message_body_path = (//div[@class="jb_0 X_6MGW N_6Fd5"])[1]/div/div/div/div/div
 
-
-# these are used in test_4 only ???????????????????????????????????????????
-message_list_container_ul = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div/div[3]/div/div[1]/ul
-messages_in_container = li > a
+# delete button
+message_delete_btn = (//div[@class="D_F em_N gl_C"]//button)[3]

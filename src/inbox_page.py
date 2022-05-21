@@ -61,14 +61,17 @@ class InboxPage(CommonPage):
     def delete_all(self):
         if not self.is_on_inbox_page():
             self.go_to_inbox_page()
-        select_dropdown_btn = self.driver.find_element(By.XPATH, self.locators["select_dropdown_btn"])
-        select_dropdown_btn.click()
         select_all_btn_wait = int(self.settings["select_all_btn_wait"])
         wait = WebDriverWait(self.driver, select_all_btn_wait)
+
+        wait.until(EC.visibility_of_element_located((By.XPATH, self.locators["select_dropdown_btn"])))
+        select_dropdown_btn = self.driver.find_element(By.XPATH, self.locators["select_dropdown_btn"])
+        select_dropdown_btn.click()
         wait.until(EC.visibility_of_element_located((By.XPATH, self.locators["select_all_btn"])))
         select_all_btn = self.driver.find_element(By.XPATH, self.locators["select_all_btn"])
         select_all_btn.click()
-        delete_btn = self.driver.find_element(By.XPATH, self.locators['delete_btn'])
+        wait.until(EC.visibility_of_element_located((By.XPATH, self.locators["delete_btn"])))
+        delete_btn = self.driver.find_element(By.XPATH, self.locators["delete_btn"])
         delete_btn.click()
 
 
