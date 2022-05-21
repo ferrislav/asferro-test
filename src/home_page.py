@@ -1,9 +1,11 @@
-from selenium.webdriver.support.ui import WebDriverWait
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 from src.base import CommonPage
 from src.login_page import LoginPage
-import time
 
 
 class HomePage(CommonPage):

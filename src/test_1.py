@@ -1,6 +1,8 @@
-from selenium.webdriver.support import expected_conditions as EC
-from src.login_page import LoginPage
 import pytest
+from selenium.webdriver.support import expected_conditions as EC
+
+from src.login_page import LoginPage
+
 
 @pytest.mark.usefixtures("driver_init", "tests_init")
 class TestLogin:

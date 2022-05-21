@@ -1,15 +1,13 @@
-import time
-
-from selenium.webdriver.support import expected_conditions as EC
-from src.inbox_page import InboxPage
-from src.compose_page import ComposePage
 import pytest
+from selenium.webdriver.support import expected_conditions as EC
+
+from src.compose_page import ComposePage
+from src.inbox_page import InboxPage
 
 
 @pytest.mark.usefixtures("driver_init", "tests_init")
 class TestCompose:
     pass
-
 
     def delete_messages_test(self):
         assert EC.url_contains(self.locators["inbox_partial_url"])
@@ -20,7 +18,6 @@ class TestCompose:
 
         messages = ip.get_all_by_me()
         assert len(messages) == 0
-
 
     def count_test(self):
         mess_quant = int(self.settings["messages_quantity"])

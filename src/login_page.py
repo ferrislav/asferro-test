@@ -1,7 +1,9 @@
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 from src.base import CommonPage
+
 
 # it's actually two pages for login name and login pass, but will use one object
 class LoginPage(CommonPage):
@@ -12,7 +14,6 @@ class LoginPage(CommonPage):
         self.locators = locators
         self.settings = settings
         self.wait_time = settings["driver_wait"]
-
 
     def enter_login(self):
         self.go_to_login_page()
@@ -37,7 +38,6 @@ class LoginPage(CommonPage):
         pass_submit_btn = self.driver.find_element(By.ID, self.locators["login_pass_submit_id"])
         pass_fld.send_keys(passwd)
         pass_submit_btn.click()
-
 
     def login(self):
         if self.is_not_logged():

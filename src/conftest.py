@@ -1,8 +1,9 @@
 import os
+
+import pytest
 from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.firefox.service import Service
-import pytest
 
 
 def should_drop(s):

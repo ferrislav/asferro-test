@@ -1,8 +1,10 @@
 import time
+
 import pytest
+
+from src.compose_page import ComposePage
 from src.inbox_page import InboxPage
 from src.message_page import MessagePage
-from src.compose_page import ComposePage
 
 
 @pytest.mark.usefixtures("driver_init", "tests_init")

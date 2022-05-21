@@ -1,8 +1,10 @@
-from selenium.webdriver.support.ui import WebDriverWait
+import time
+
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
-import time
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 class CommonPage:
     def __init__(self, driver, locators, settings):
@@ -51,17 +53,14 @@ class CommonPage:
         url = self.driver.current_url
         return url == self.locators["login_url"]
 
-
     def is_on_messages_page(self):
         url = self.driver.current_url
         return url == self.locators["messages_partial_url"]
-
 
     # inbox page url is always the same so easiest way is simply navigate
     def go_to_inbox_page(self):
         self.driver.get(self.locators["inbox_url"])
         time.sleep(0.5)
-
 
     def go_to_home_page(self):
         self.driver.get(self.locators["home_page"])

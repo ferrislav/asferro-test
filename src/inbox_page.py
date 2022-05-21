@@ -1,12 +1,12 @@
+import logging
 import time
 
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+
 from src.base import CommonPage
-import logging
-import pdb
 
 
 class InboxPage(CommonPage):
@@ -16,7 +16,6 @@ class InboxPage(CommonPage):
         self.driver = driver
         self.locators = locators
         self.settings = settings
-
 
     def click_inbox_btn(self):
         if not self.is_on_inbox_page():
@@ -63,7 +62,6 @@ class InboxPage(CommonPage):
         delete_btn = self.driver.find_element(By.XPATH, self.locators["delete_btn"])
         delete_btn.click()
 
-
     def is_inbox_empty(self):
         """
         Loops and wait for at least some messages appear in inbox.
@@ -72,7 +70,7 @@ class InboxPage(CommonPage):
         if not self.is_on_inbox_page():
             self.go_to_inbox_page()
 
-        WebDriverWait(self.driver, 10)\
+        WebDriverWait(self.driver, 10) \
             .until(EC.presence_of_element_located((By.ID, self.locators["mail_app_component_id"])))
         # loop while empty or exceeds
         for _ in range(5):
@@ -86,8 +84,6 @@ class InboxPage(CommonPage):
             except NoSuchElementException:
                 return False
         return True
-
-
 
     def all_messages_arrived(self):
         """

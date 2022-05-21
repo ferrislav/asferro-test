@@ -1,6 +1,7 @@
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 from src.base import CommonPage
 
 
@@ -28,13 +29,11 @@ class MessagePage(CommonPage):
         body = self.driver.find_element(By.XPATH, self.locators["message_body_path"]).text
         return topic, body
 
-
-
     def delete_if_not(self, link, filter_str):
         self._go_to_message(link)
         self.driver.implicitly_wait(1)
         topic = self.get_topic()
-        WebDriverWait(self.driver, 10)\
+        WebDriverWait(self.driver, 10) \
             .until(EC.visibility_of_element_located((By.XPATH, self.locators["message_delete_btn"])))
         delete_btn = self.driver.find_element(By.XPATH, self.locators["message_delete_btn"])
         if not topic.__eq__(filter_str):

@@ -1,12 +1,11 @@
-import pdb
-import string
 import secrets
+import string
 import time
 
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-import logging
+from selenium.webdriver.support.ui import WebDriverWait
+
 from src.base import CommonPage
 
 
