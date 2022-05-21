@@ -32,6 +32,7 @@ class MessagePage(CommonPage):
 
     def delete_if_not(self, link, filter_str):
         self._go_to_message(link)
+        self.driver.implicitly_wait(1)
         topic = self.get_topic()
         WebDriverWait(self.driver, 10)\
             .until(EC.visibility_of_element_located((By.XPATH, self.locators["message_delete_btn"])))

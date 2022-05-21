@@ -22,7 +22,7 @@ class ComposePage(CommonPage):
     def click_compose_button(self):
         # work on pre assumption that driver is on compose page.
         t = int(self.settings["driver_wait"])
-        wait = WebDriverWait(self.driver, t)
+        wait = WebDriverWait(self.driver, 15)
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, self.locators["compose_btn"])))
         button = self.driver.find_element(By.CSS_SELECTOR, self.locators["compose_btn"])
         button.click()
@@ -99,4 +99,4 @@ class ComposePage(CommonPage):
         body_fld.send_keys(str_tup[1])
         send_button.click()
         # otherwise it sends soo quick email box can not distinguish requests.
-        time.sleep(0.2)
+        time.sleep(0.4)

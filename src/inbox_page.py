@@ -97,7 +97,7 @@ class InboxPage(CommonPage):
         if not self.is_on_inbox_page():
             self.go_to_inbox_page()
         m_length = int(self.settings["messages_quantity"])
-        for _ in range(4):
+        for i in range(4):
             messages = self.get_all_by_me()
             time.sleep(0.3)
             if len(messages) == m_length:

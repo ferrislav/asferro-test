@@ -20,7 +20,9 @@ It's possible to have comments in these files and empty strings. Comments must s
 
 Test is using geckodriver and drivers binary shall be somewhere on testing machine.
 `driver_exec_path` in settings file shall point to geckodriver.
-`browser_profile` in settings file shall point to test profile for Mozilla Firefox.
+`browser_profile` in settings file shall point to test profile for Mozilla Firefox.  
+Add  these settings after equality sign.  
+Tests are writen on Python 3.8.10
 
 ### Test execution:
 
@@ -28,3 +30,8 @@ Test is using geckodriver and drivers binary shall be somewhere on testing machi
 * Go to root directory.
 * Run `python -m pip install -r requirements.txt`
 * Run `pytest` in terminal. 
+
+
+Test is running in headless and eager mode, in case if it switched to full browser mode it's better  
+change page_load_strategy to `normal`, as well, otherwise test becomes too flaky.  
+Settings for driver options are  in settings file.

@@ -1,12 +1,14 @@
 # Settings for tests. All that will require adjustments.
 
 # driver creation
-driver_exec_path = /home/zxxz/.cargo/bin/geckodriver
-browser_profile = /home/zxxz/.mozilla/firefox/70g38rbt.Selenium_webdriver
+driver_exec_path = <put geckodriver binary path here>
+browser_profile = <put path to firefox profile dir here>
 page_load_strategy = eager
 
+# run in headless mode True of False
+headless = True
+
 # common to tests
-# TODO: Don't forget to change to 10
 messages_quantity = 10
 driver_wait = 2
 

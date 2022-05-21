@@ -54,6 +54,7 @@ def tests_init(request, locators, settings):
 def driver_init(request, settings):
     options = FirefoxOptions()
     options.page_load_strategy = settings['page_load_strategy']
+    options.headless = eval(settings["headless"])
     profile_path = settings['browser_profile']
     options.set_preference('profile', profile_path)
     service = Service(settings['driver_exec_path'])

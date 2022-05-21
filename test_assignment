@@ -1,0 +1,35 @@
+Test challenge
+QA-automation engineer
+
+Stack: 
+    • Language: Python / JavaScript / Java (depends on position requirements)
+    • Web-Driver: Selenium / Puppeteer (depends on position requirements)
+    • Test framework: up to you
+
+Write a test using defined language, framework and web-driver that should perform next steps:
+
+    1. Login to any email box.
+    2. Send from 10 mails from current box to yourself with:
+        ◦ Theme: Random string with 10 symbols (letters and numbers only)
+        ◦ Body: Random string with 10 symbols (letters and numbers only)
+    3. Check that all 10 mails are delivered.
+    4. Collect data from all incoming mails and save it as Object (Dictionary), where:
+        ◦ Key is theme of mail
+        ◦ Value is body of mail
+    5. Send collected data to yourself as: “Received mail on theme {Theme} with message: {Body}. It contains {Count of letters} letters and {Count of numbers} numbers” (repeat for each mail).
+    6. Delete all received mails except the last one.
+
+
+Requirements:
+    1. Do not use auto-generated selectors
+    2. Use testing patterns
+    3. Script should be autonomous, without hardcoded settings and paths
+    4. requiremnts.txt (for Python)
+
+Would be a plus:
+    1. Use OOP principles 
+    2. Assertion libraries
+    3. README included with instructions for running
+    5. Comments in code
+    6. PEP-8 (for Python), es-lint (for JS)
+

@@ -6,5 +6,5 @@ share/
 lib64
 *.log
 src/__pycache__
-test_assignment*
+test_assignment_copy
 
