@@ -4,24 +4,35 @@ user_login = asferrotest
 user_password = 9eqLiR8VgsR3t7Ta
 user_address = asferrotest@yahoo.com
 
-# Login page.
+# URLs.
 # locator of login page for email box
+home_url = https://www.yahoo.com/
 login_url = https://login.yahoo.com/
 login_pass_partial_url = /account/challenge/password
+inbox_url = https://mail.yahoo.com/d/folders/1
+inbox_partial_url = mail.yahoo.com/d/folders/1
+compose_partial_url = mail.yahoo.com/d/compose
+
+# sign up checks
+signup_locator = a._yb_1vuak
+user_name_span = span._yb_ynfjo
+
+# login page
 login_username_id = login-username
 login_username_next_btn = login-signin
 login_pass_fld_id = login-passwd
 login_pass_submit_id = login-signin
 
+# compose page
 # button for transferring to mail account.
-mail_link = ybarMailLink
-mail_home_partial_url = mail.yahoo.com
+mail_link = a#ybarMailLink
+# mail_home_partial_url = mail.yahoo.com
 
 # Check if inbox is empty
 # Root element for mails in inbox.
 mail_app_component_id = mail-app-component
 # partial xpath starting from mail_app_component_id element
-info_message_path = ./div[2]/div/div[2]/div[1]/span[1]
+info_message_path = //div[@id="mail-app-component"]/div[2]/div/div[2]/div/span
 
 # css selector for attributed link button to compose
 # it's a css selector!
@@ -46,11 +57,11 @@ message_list_item_class = message-list-item
 # div with ul and lists for messages.
 
 message_list_container_ul = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div/div[3]/div/div[1]/ul
-all_msgs = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div/div[3]/div/div[1]/ul/li
+all_messages = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div//ul/li/a
 # mail-app-component > div > div > div > div.D_F.ab_FT.em_N.ek_BB.iz_A.H_6D6F > div > div > div.W_6D6F.H_6D6F.cZ1RN91d_n.o_h.p_R.em_N.D_F > div > div.p_R.Z_0.iy_h.iz_A.W_6D6F.H_6D6F.k_w.em_N.c22hqzz_GN > ul
 # partial locator from message_list_container_path
 messages_in_container = li > a
-message_sender = //a/div/div[1]/div[2]/span/*[1]
+message_sender = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div//ul/li/a/div/div[1]/div[2]/span
 
 # Page for message
 message_topic_css=span[data-test-id="message-group-subject-text"]
