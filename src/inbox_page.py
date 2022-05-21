@@ -25,6 +25,10 @@ class InboxPage(CommonPage):
         inbox_btn.click()
 
     def get_all_by_me(self):
+        """
+        Search for messages and filter out these which I didn't send
+        :return: List of links for messages
+        """
         res = []
         # self.driver.implicitly_wait(3)
         # original:            //*[@id="mail-app-component"]/div/div/div/div[2]/div/div/div[3]/div/div[1]/ul
@@ -111,12 +115,7 @@ class InboxPage(CommonPage):
                 self.click_inbox_btn()
         return False
 
-                # mail_component = self.driver.find_element(By.ID, self.locators["mail_app_component_id"])
-                # message on the top of letters folder
                 # browser find it like this, but will try other shorter option
-                # //div[@id="mail-app-component"]/div[2]/div//span[contains(text(), "Inbox")]/parent::span/parent::span
                 # //div[@id="mail-app-component"]/div[2]/div/div[2]/div/span
                 # I think some time path after div[2] changes.
                 # text is visible must return no future check is required.
-
-

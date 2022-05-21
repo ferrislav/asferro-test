@@ -12,63 +12,64 @@ login_pass_partial_url = /account/challenge/password
 inbox_url = https://mail.yahoo.com/d/folders/1
 inbox_partial_url = mail.yahoo.com/d/folders/1
 compose_partial_url = mail.yahoo.com/d/compose
+messages_partial_url = mail.yahoo.com/d/folders/1/messages
 
-# sign up checks
+# HomePage -----------------------------------------
+# if user is not signed this link is present in top right corner
 signup_locator = a._yb_1vuak
+
+# if user is logged this span is present holding user's name
 user_name_span = span._yb_ynfjo
 
-# login page
+# login page inputs and buttons for login controllers
 login_username_id = login-username
 login_username_next_btn = login-signin
 login_pass_fld_id = login-passwd
 login_pass_submit_id = login-signin
 
-# compose page
 # button for transferring to mail account.
 mail_link = a#ybarMailLink
-# mail_home_partial_url = mail.yahoo.com
 
-# Check if inbox is empty
-# Root element for mails in inbox.
+# Inbox Page -------------------------
+# Root div for mails in inbox.
 mail_app_component_id = mail-app-component
-# partial xpath starting from mail_app_component_id element
-info_message_path = //div[@id="mail-app-component"]/div[2]/div/div[2]/div/span
 
-# css selector for attributed link button to compose
-# it's a css selector!
+# xpath for info span for empty inbox
+info_message_path = //div[@id="mail-app-component"]/div[2]/div/div[2]/div/span
+# //div[@id="mail-app-component"]/div[2]/div//span[contains(text(), "Inbox")]/parent::span/parent::span
+
+# all messages in inbox
+all_messages = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div//ul/li/a
+
+# span with sender info
+message_sender = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div//ul/li/a/div/div[1]/div[2]/span
+
+# css selector for compose button
 compose_btn = a.e_dRA
-to_fld_id = message-to-field
-# css selector for subject input
-subject_fld = input.q_T:nth-child(1)
-body_fld_class = rte
-send_mail_btn_class = q_Z29WjXl
+
+inbox_btn = (//a[@data-test-id='folder-list-item'])[1]
 
 # Delete messages
 select_all_btn = /html/body/div[1]/div/div[1]/div/div[7]/div/div[1]/div/ul/li[1]/button
 select_dropdown_btn = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[1]/div/div[1]/div/div/ul/li[2]/div/span/button/span
 delete_btn = /html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div/div/div[1]/div/div[2]/div/div[3]/button
 
-# CHECK AND WORK WITH EMAILS THAT WERE SEND.
+# Compose Page -----------------------------
+to_fld_id = message-to-field
+# css selector for subject input
+subject_fld = input.q_T:nth-child(1)
+body_fld_class = rte
+send_mail_btn_class = q_Z29WjXl
 
-inbox_btn = (//a[@data-test-id='folder-list-item'])[1]
-message_list_item_class = message-list-item
-
-# $x("//li[@role='list-item']")
-# div with ul and lists for messages.
-
-message_list_container_ul = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div/div[3]/div/div[1]/ul
-all_messages = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div//ul/li/a
-# mail-app-component > div > div > div > div.D_F.ab_FT.em_N.ek_BB.iz_A.H_6D6F > div > div > div.W_6D6F.H_6D6F.cZ1RN91d_n.o_h.p_R.em_N.D_F > div > div.p_R.Z_0.iy_h.iz_A.W_6D6F.H_6D6F.k_w.em_N.c22hqzz_GN > ul
-# partial locator from message_list_container_path
-messages_in_container = li > a
-message_sender = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div//ul/li/a/div/div[1]/div[2]/span
-
-# Page for message
+# MessagePage  ------------------------------------
 message_topic_css=span[data-test-id="message-group-subject-text"]
 message_body_div_class = X_6MGW
 # partial path starting from message_body_div_class
 message_body_path = .//div[dir="ltr"]
 # message_holder_css = div[dir="ltr"]
 
-# Full path of ul containing li of messages.
-# message_list_container_css = div[data-test-id$='virtual-list'] ul
+
+
+# these are used in test_4 only ???????????????????????????????????????????
+message_list_container_ul = //*[@id="mail-app-component"]/div/div/div/div[2]/div/div/div[3]/div/div[1]/ul
+messages_in_container = li > a

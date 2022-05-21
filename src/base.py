@@ -63,6 +63,10 @@ class CommonPage:
         return EC.url_contains(self.locators["login_url"])
 
 
+    def is_on_messages_page(self):
+        return EC.url_contains(self.locators["messages_partial_url"])
+
+
     # inbox page url is always the same so easiest way is simply navigate
     def go_to_inbox_page(self):
         self.driver.get(self.locators["inbox_url"])
@@ -87,18 +91,18 @@ class CommonPage:
     #         return False
     #     return True
 
-    def is_message_container_present(self):
-        # pdb.set_trace()
-        is_present = False
-        msg_container_loop = int(self.settings["msg_container_loop"])
-        msg_container_loop_sleep = int(self.settings["msg_container_loop_sleep"])
-        msg_container_rt_sleep = float(self.settings["msg_container_rt_sleep"])
-        for i in range(msg_container_loop):
-            is_present = self.is_element_findable(
-                locate_with(By.CSS_SELECTOR, self.locators["message_list_container_ul"]))
-            if is_present:
-                break
-            time.sleep(msg_container_loop_sleep)
-        # give browser time to load component
-        time.sleep(msg_container_rt_sleep)
-        return is_present
+   #  def is_message_container_present(self):
+   #      # pdb.set_trace()
+   #      is_present = False
+   #      msg_container_loop = int(self.settings["msg_container_loop"])
+   #      msg_container_loop_sleep = int(self.settings["msg_container_loop_sleep"])
+   #      msg_container_rt_sleep = float(self.settings["msg_container_rt_sleep"])
+   #      for i in range(msg_container_loop):
+   #          is_present = self.is_element_findable(
+   #              locate_with(By.CSS_SELECTOR, self.locators["message_list_container_ul"]))
+   #          if is_present:
+   #              break
+   #          time.sleep(msg_container_loop_sleep)
+   #      # give browser time to load component
+   #      time.sleep(msg_container_rt_sleep)
+   #      return is_present
