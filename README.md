@@ -2,12 +2,8 @@
 
 The goal of this test is to test Yahoo Mail Box.
 More information is in `test_assignment` file.
-Temporary account was created on Yahoo with credentials:  
-user_login: asferrotest  
-user_password: 9eqLiR8VgsR3t7Ta  
-There is no intention to keep this account in the future, but
-future test are required temporary account could be created 
-again and credential should be changed in `locators` file
+To run Tests from this project mail account must be available on yahoo.com  
+Credentials for account password and login must be changed in `locators` file.
 
 ### Test environment: 
 
